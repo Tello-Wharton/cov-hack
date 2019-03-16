@@ -1,7 +1,6 @@
-package site.site.site.model.State;
+package site.site.site.model.state;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class StateVersion {
 

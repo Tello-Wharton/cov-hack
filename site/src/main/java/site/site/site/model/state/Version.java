@@ -1,4 +1,4 @@
-package site.site.site.model.State;
+package site.site.site.model.state;
 
 class Version {
 
