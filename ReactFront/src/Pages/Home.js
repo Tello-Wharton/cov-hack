@@ -42,22 +42,24 @@ class Home extends Component {
     clientWebSocket.onmessage = function(event) {
       const timestamp = JSON.parse(event.data)
 
+      console.log(timestamp);
+
       self.setState({
          timestamp: timestamp.version
        });
-
-       const test = new WebSocket("ws://localhost:8080/state-updater");
-       test.onopen = function() {
-
-         console.log("YAY")
-
-         setInterval(() => {
-           test.send("FUCK YEAH!");
-           console.log("FUCK YEAH!");
-         }, 1000 );
-       };
-
     }
+
+
+   // const test = new WebSocket("ws://localhost:8080/state-updater");
+   // test.onopen = function() {
+
+   //   console.log("YAY")
+
+   //   setInterval(() => {
+   //     test.send("FUCK YEAH!");
+   //     console.log("FUCK YEAH!");
+   //   }, 1000 );
+   // };
   }
 
 

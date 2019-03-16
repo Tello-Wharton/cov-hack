@@ -23,7 +23,7 @@ class Login extends Component {
       'username': this.state.name
     }
 
-    axios.post(`http://localhost:8080/login`, {datasend})
+    axios.post(`http://localhost:8080/login`, datasend)
       .then(res => {
         console.log(res);
         // console.log(res.data);
