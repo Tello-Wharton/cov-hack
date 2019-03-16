@@ -10,32 +10,13 @@ class Home extends Component {
       normalpizzaimgurl : [],
       normalpizzaprice : [],
       normalpizzatype : [],
-
-      glutenpizzatitles : [],
-      glutenpizzaimgurl : [],
-      glutenpizzaprice : [],
-      glutenpizzatype : [],
-
-      sidestitles : [],
-      sidesimgurl : [],
-      sidesprice : [],
-      sidestype : [],
-
-      desertstitles : [],
-      desertsimgurl : [],
-      desertsprice : [],
-      desertstype : []
+      timestamp: ""
     };
   }
 
-
-
   componentDidMount() {
-
     const self = this;
-
     axios.get('http://localhost:8080/menu/da11ln').then(function (response) {
-
       for(var key in response["data"]["0"]["subcategories"]["1"]["products"]) {
           self.setState({
             normalpizzatitles:[...self.state.normalpizzatitles, response["data"]["0"]["subcategories"]["1"]["products"][key]["name"]],
@@ -44,7 +25,7 @@ class Home extends Component {
             normalpizzatype:[...self.state.normalpizzatype, response["data"]["0"]["subcategories"]["1"]["products"][key]["type"]]
           });
       }
-      
+
     })
 
     var clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
@@ -58,10 +39,13 @@ class Home extends Component {
         console.log("WebSocket Error >:(")
     };
     clientWebSocket.onmessage = function(event) {
-        console.log(JSON.parse(event.data));
+      const timestamp = JSON.parse(event.data)
+
+      self.setState({
+         timestamp: timestamp.version
+       });
 
     }
-
   }
 
 
@@ -69,6 +53,7 @@ class Home extends Component {
     return (
       <div className="App">
         <p>Home</p>
+        <p>{this.state.timestamp}</p>
         {this.state.normalpizzatitles.map((ref, i) =>
           <Carding
             imgurl = {this.state.normalpizzaimgurl[i]}
