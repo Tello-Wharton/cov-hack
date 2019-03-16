@@ -10,32 +10,13 @@ class Home extends Component {
       normalpizzaimgurl : [],
       normalpizzaprice : [],
       normalpizzatype : [],
-
-      glutenpizzatitles : [],
-      glutenpizzaimgurl : [],
-      glutenpizzaprice : [],
-      glutenpizzatype : [],
-
-      sidestitles : [],
-      sidesimgurl : [],
-      sidesprice : [],
-      sidestype : [],
-
-      desertstitles : [],
-      desertsimgurl : [],
-      desertsprice : [],
-      desertstype : []
+      timestamp: ""
     };
   }
 
-
-
   componentDidMount() {
-
     const self = this;
-
     axios.get('http://localhost:8080/menu/da11ln').then(function (response) {
-
       for(var key in response["data"]["0"]["subcategories"]["1"]["products"]) {
           self.setState({
             normalpizzatitles:[...self.state.normalpizzatitles, response["data"]["0"]["subcategories"]["1"]["products"][key]["name"]],
@@ -47,21 +28,38 @@ class Home extends Component {
 
     })
 
-    var clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
+    const clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
+
     clientWebSocket.onopen = function() {
-        console.log("WebSocket Opened!")
+      console.log("WebSocket Opened!")
     };
     clientWebSocket.onclose = function(error) {
-        console.log("WebSocket Closed </3")
+      console.log("WebSocket Closed </3")
     };
     clientWebSocket.onerror = function(error) {
-        console.log("WebSocket Error >:(")
+      console.log("WebSocket Error >:(")
     };
     clientWebSocket.onmessage = function(event) {
-        console.log(JSON.parse(event.data));
+      const timestamp = JSON.parse(event.data)
 
+      console.log(timestamp);
+
+      self.setState({
+         timestamp: timestamp.version
+       });
     }
 
+
+   // const test = new WebSocket("ws://localhost:8080/state-updater");
+   // test.onopen = function() {
+
+   //   console.log("YAY")
+
+   //   setInterval(() => {
+   //     test.send("FUCK YEAH!");
+   //     console.log("FUCK YEAH!");
+   //   }, 1000 );
+   // };
   }
 
 
@@ -69,6 +67,8 @@ class Home extends Component {
     return (
       <div className="App">
         <p>Home</p>
+
+        <p>{this.state.timestamp}</p>
         <div className="foods">
           {this.state.normalpizzatitles.map((ref, i) =>
             <Carding
