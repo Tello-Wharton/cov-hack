@@ -44,7 +44,7 @@ class Home extends Component {
             normalpizzatype:[...self.state.normalpizzatype, response["data"]["0"]["subcategories"]["1"]["products"][key]["type"]]
           });
       }
-      
+
     })
 
     var clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
@@ -69,15 +69,17 @@ class Home extends Component {
     return (
       <div className="App">
         <p>Home</p>
-        {this.state.normalpizzatitles.map((ref, i) =>
-          <Carding
-            imgurl = {this.state.normalpizzaimgurl[i]}
-            title = {this.state.normalpizzatitles[i]}
-            type = {this.state.normalpizzatype[i]}
-            price = {this.state.normalpizzaprice[i]}
-            />
-        )}
+        <div className="foods">
+          {this.state.normalpizzatitles.map((ref, i) =>
+            <Carding
+              imgurl = {this.state.normalpizzaimgurl[i]}
+              title = {this.state.normalpizzatitles[i]}
+              type = {this.state.normalpizzatype[i]}
+              price = {this.state.normalpizzaprice[i]}
+              />
+          )}
       </div>
+    </div>
     );
   }
 }
