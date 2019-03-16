@@ -6,18 +6,14 @@
     <script type="text/javascript">
         var clientWebSocket = new WebSocket("ws://localhost:8080/event-emitter");
         clientWebSocket.onopen = function() {
-            console.log("clientWebSocket.onopen", clientWebSocket);
-            console.log("clientWebSocket.readyState", "websocketstatus");
-            clientWebSocket.send("event-me-from-browser");
-        }
+            console.log("WebSocket Opened!")
+        };
         clientWebSocket.onclose = function(error) {
-            console.log("clientWebSocket.onclose", clientWebSocket, error);
-            events("Closing connection");
-        }
+            console.log("WebSocket Closed </3")
+        };
         clientWebSocket.onerror = function(error) {
-            console.log("clientWebSocket.onerror", clientWebSocket, error);
-            events("An error occured");
-        }
+            console.log("WebSocket Error >:(")
+        };
         clientWebSocket.onmessage = function(event) {
             console.log(JSON.parse(event.data));
         }

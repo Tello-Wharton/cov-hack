@@ -26,8 +26,9 @@ public class SocketConfiguration {
         map.put("/event-emitter", webSocketHandler);
 
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
-        handlerMapping.setOrder(1);
+        handlerMapping.setOrder(20);
         handlerMapping.setUrlMap(map);
+
         return handlerMapping;
     }
 
