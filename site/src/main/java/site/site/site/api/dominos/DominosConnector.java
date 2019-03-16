@@ -3,12 +3,15 @@ package site.site.site.api.dominos;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
+import site.site.site.api.dominos.model.MenuSection;
+import site.site.site.api.dominos.model.Store;
 import site.site.site.api.dominos.model.StoreSearchResults;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 @Service
 public class DominosConnector {
@@ -36,6 +39,28 @@ public class DominosConnector {
                 .build()
                 .toUri();
 
+        HttpResponse<String> response = get(uri);
+
+        return gson.fromJson(response.body(), StoreSearchResults.class);
+    }
+
+    public List<MenuSection> getMenu(Store store) {
+        URI uri = UriComponentsBuilder.newInstance()
+                .scheme(scheme)
+                .host(host)
+                .path("/ProductCatalog/GetStoreCatalog")
+                .queryParam("collectionOnly", false)
+                .queryParam("menuVersion", store.menuVersion)
+                .queryParam("storeId", store.id)
+                .build()
+                .toUri();
+
+        HttpResponse<String> response = get(uri);
+
+        return gson.fromJson(response.body(), List.class);
+    }
+
+    private HttpResponse get(URI uri) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .GET()
@@ -49,6 +74,6 @@ public class DominosConnector {
             return null;
         }
 
-        return gson.fromJson(response.body(), StoreSearchResults.class);
+        return response;
     }
 }
