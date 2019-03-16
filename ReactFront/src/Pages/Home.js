@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import socketIOClient from 'socket.io-client'
-import { connect } from "./api";
 import Carding from "./Carding";
 
 class Home extends Component {
@@ -9,19 +7,25 @@ class Home extends Component {
   this.state = {
       endpoint: "http://localhost:8080/"
     };
-
-  connect(message => {
-      console.log(message);
-    });
   }
 
   componentDidMount() {
     let  self = this;
 
-    const socket = socketIOClient(self.state.endpoint)
+    var clientWebSocket = new WebSocket("ws://localhost:8080/event-emitter");
+    clientWebSocket.onopen = function() {
+        console.log("WebSocket Opened!")
+    };
+    clientWebSocket.onclose = function(error) {
+        console.log("WebSocket Closed </3")
+    };
+    clientWebSocket.onerror = function(error) {
+        console.log("WebSocket Error >:(")
+    };
+    clientWebSocket.onmessage = function(event) {
+        console.log(JSON.parse(event.data));
+    }
 
-    //socket.emit('gryo', 'gryo')
-    //socket.emit('acceleration', 'acceler')
   }
 
 
