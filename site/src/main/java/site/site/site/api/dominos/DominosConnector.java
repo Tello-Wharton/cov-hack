@@ -16,11 +16,8 @@ public class DominosConnector {
     private final String scheme = "https";
     private final String host = "www.dominos.co.uk";
     private final Gson gson;
-    private final UriComponentsBuilder uriComponentsBuilder;
 
-    public DominosConnector(UriComponentsBuilder uriComponentsBuilder) {
-        this.uriComponentsBuilder = uriComponentsBuilder;
-
+    public DominosConnector() {
         this.gson = new Gson();
         this.httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
@@ -31,7 +28,7 @@ public class DominosConnector {
      * For good results, use a postcode
      */
     public StoreSearchResults storeSearch(String searchTerm) {
-        URI uri = uriComponentsBuilder
+        URI uri = UriComponentsBuilder.newInstance()
                 .scheme(scheme)
                 .host(host)
                 .path("/storefindermap/storesearch")
