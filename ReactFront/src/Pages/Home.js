@@ -8,14 +8,55 @@ class Home extends Component {
   constructor(props) {
   super(props);
   this.state = {
-      name: "lol"
+      normalpizzatitles : [],
+      normalpizzaimgurl : [],
+      normalpizzaprice : [],
+      normalpizzatype : [],
+
+      glutenpizzatitles : [],
+      glutenpizzaimgurl : [],
+      glutenpizzaprice : [],
+      glutenpizzatype : [],
+
+      sidestitles : [],
+      sidesimgurl : [],
+      sidesprice : [],
+      sidestype : [],
+
+      desertstitles : [],
+      desertsimgurl : [],
+      desertsprice : [],
+      desertstype : []
     };
   }
 
-  
+
 
   componentDidMount() {
+
+    const self = this;
+
     axios.get('http://localhost:8080/menu/da11ln').then(function (response) {
+      for(var key in response["data"]["0"]["subcategories"]["1"]["products"]) {
+          self.setState({
+            normalpizzatitles:[...self.state.normalpizzatitles, response["data"]["0"]["subcategories"]["1"]["products"][key]["name"]],
+            normalpizzaimgurl:[...self.state.normalpizzaimgurl, response["data"]["0"]["subcategories"]["1"]["products"][key]["imageUrl"]],
+            normalpizzaprice:[...self.state.normalpizzaprice, response["data"]["0"]["subcategories"]["1"]["products"][key]["displayPrice"]],
+            normalpizzatype:[...self.state.normalpizzatype, response["data"]["0"]["subcategories"]["1"]["products"][key]["type"]]
+          });
+      }
+      //
+      // for(var key in response["data"]["0"]["subcategories"]["2"]["products"]) {
+      //   console.log(response["data"]["0"]["subcategories"]["2"]["products"][key]["name"]);
+      // }
+
+      // for(var key in response["data"]["1"]["subcategories"]["0"]["products"]) {
+      //   console.log(response["data"]["1"]["subcategories"]["0"]["products"][key]["name"]);
+      // }
+
+      // for(var key in response["data"]["2"]["subcategories"]["0"]["products"]) {
+      //   console.log(response["data"]["2"]["subcategories"]["0"]["products"][key]["name"]);
+      // }
 
       //console.log(response["data"]["0"]["subcategories"]["1"]["products"]["0"]["name"]);
       //console.log(response["data"]["0"]["subcategories"]["1"]["products"]["0"]["imageUrl"]);
@@ -46,18 +87,14 @@ class Home extends Component {
     return (
       <div className="App">
         <p>Home</p>
-        <Carding
-          imgurl = "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-          title = "Large Cheese Pizza"
-          type = "Pizza"
-          price = "£6"
-          />
+        {this.state.normalpizzatitles.map((ref, i) =>
           <Carding
-            imgurl = "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-            title = "Large Cheese Pizza"
-            type = "Pizza"
-            price = "£6"
+            imgurl = {this.state.normalpizzaimgurl[i]}
+            title = {this.state.normalpizzatitles[i]}
+            type = {this.state.normalpizzatype[i]}
+            price = {this.state.normalpizzaprice[i]}
             />
+        )}
       </div>
     );
   }
