@@ -23,6 +23,48 @@
   color: #61dafb;
 }
 
+.App {
+  width: 1600px;
+  margin: auto;
+}
+
+.foods {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 256px;
+  height: 256px;
+  margin: 25px;
+  position: relative;
+}
+
+.card-title {
+  font-size: larger;
+  height: 1em;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 5px;
+}
+
+.card-footer {
+  position: absolute;
+  bottom: 0px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 5px;
+  width: 100%;
+}
+
+.card-text, .card-footer button {
+  display: inline;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.card-subtitle {
+  display: none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -30,4 +72,5 @@
   to {
     transform: rotate(360deg);
   }
+
 }

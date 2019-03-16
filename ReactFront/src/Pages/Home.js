@@ -67,16 +67,19 @@ class Home extends Component {
     return (
       <div className="App">
         <p>Home</p>
+
         <p>{this.state.timestamp}</p>
-        {this.state.normalpizzatitles.map((ref, i) =>
-          <Carding
-            imgurl = {this.state.normalpizzaimgurl[i]}
-            title = {this.state.normalpizzatitles[i]}
-            type = {this.state.normalpizzatype[i]}
-            price = {this.state.normalpizzaprice[i]}
-            />
-        )}
+        <div className="foods">
+          {this.state.normalpizzatitles.map((ref, i) =>
+            <Carding
+              imgurl = {this.state.normalpizzaimgurl[i]}
+              title = {this.state.normalpizzatitles[i]}
+              type = {this.state.normalpizzatype[i]}
+              price = {this.state.normalpizzaprice[i]}
+              />
+          )}
       </div>
+    </div>
     );
   }
 }
