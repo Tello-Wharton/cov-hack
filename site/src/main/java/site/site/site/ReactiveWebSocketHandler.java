@@ -28,14 +28,12 @@ public class ReactiveWebSocketHandler implements WebSocketHandler {
 
     @Override
     public Mono<Void> handle(WebSocketSession webSocketSession) {
+
         return webSocketSession.send(intervalFlux
                 .map(String::valueOf)
                 .map(signal -> new StateFragment())
                 .map(stateFragment -> gson.toJson(stateFragment))
-                .map(webSocketSession::textMessage))
-                .and(webSocketSession.receive()
-                        .map(WebSocketMessage::getPayloadAsText)
-                        .log());
+                .map(webSocketSession::textMessage));
     }
 
 
