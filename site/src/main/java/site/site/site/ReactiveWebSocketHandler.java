@@ -1,15 +1,12 @@
 package site.site.site;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
-import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import site.site.site.model.StateFragment;
+import site.site.site.model.State.StateVersion;
 
 import java.time.Duration;
 
@@ -31,8 +28,8 @@ public class ReactiveWebSocketHandler implements WebSocketHandler {
 
         return webSocketSession.send(intervalFlux
                 .map(String::valueOf)
-                .map(signal -> new StateFragment())
-                .map(stateFragment -> gson.toJson(stateFragment))
+                .map(signal -> new StateVersion())
+                .map(stateVersion -> gson.toJson(stateVersion))
                 .map(webSocketSession::textMessage));
     }
 
