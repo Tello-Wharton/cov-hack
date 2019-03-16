@@ -10,10 +10,11 @@ public class StateFragment {
 
 //        @Id
 //        @GeneratedValue(strategy= GenerationType.AUTO)
-        private Long id;
+
+        private Long version;
 
         public StateFragment(){
-                this.id = 1L;
+                this.version = VersionMaster.getVersion();
         }
 
 }

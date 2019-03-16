@@ -18,12 +18,8 @@
             console.log("clientWebSocket.onerror", clientWebSocket, error);
             events("An error occured");
         }
-        clientWebSocket.onmessage = function(error) {
-            console.log("clientWebSocket.onmessage", clientWebSocket, error);
-            events(error.data);
-        }
-        function events(responseEvent) {
-            console.log("CAKE")
+        clientWebSocket.onmessage = function(event) {
+            console.log(JSON.parse(event.data));
         }
     </script>
     <p>Cake</p>
