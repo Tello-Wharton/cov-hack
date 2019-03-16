@@ -50,16 +50,16 @@ class Home extends Component {
     }
 
 
-   // const test = new WebSocket("ws://localhost:8080/state-updater");
-   // test.onopen = function() {
+   const test = new WebSocket("ws://localhost:8080/state-updater");
+   test.onopen = function() {
 
-   //   console.log("YAY")
+     console.log("YAY")
 
-   //   setInterval(() => {
-   //     test.send("FUCK YEAH!");
-   //     console.log("FUCK YEAH!");
-   //   }, 1000 );
-   // };
+     setInterval(() => {
+       test.send("FUCK YEAH!");
+       console.log("FUCK YEAH!");
+     }, 1000 );
+   };
   }
 
 
