@@ -28,7 +28,7 @@ public class ReactiveWebSocketHandler implements WebSocketHandler {
 
         return webSocketSession.send(intervalFlux
                 .map(String::valueOf)
-                .map(signal -> new StateVersion())
+                .map(signal -> StateVersion.getStateVersion(state -> state.addName("CALL")))
                 .map(stateVersion -> gson.toJson(stateVersion))
                 .map(webSocketSession::textMessage));
     }
