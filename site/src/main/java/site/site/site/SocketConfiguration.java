@@ -17,7 +17,6 @@ import java.util.Map;
 public class SocketConfiguration {
 
     @Autowired
-    @Qualifier("ReactiveWebSocketHandler")
     private WebSocketHandler webSocketHandler;
 
     @Bean

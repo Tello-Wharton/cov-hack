@@ -13,7 +13,7 @@ import site.site.site.model.StateFragment;
 
 import java.time.Duration;
 
-@Component("ReactiveWebSocketHandler")
+@Component
 public class ReactiveWebSocketHandler implements WebSocketHandler {
 
     Flux<Long> intervalFlux = Flux.interval(Duration.ofSeconds(1));
