@@ -2,26 +2,43 @@ import React, { Component } from 'react';
 import socketIOClient from 'socket.io-client'
 import { connect } from "./api";
 import Carding from "./Carding";
+import axios from 'axios';
 
 class Home extends Component {
   constructor(props) {
   super(props);
   this.state = {
-      endpoint: "http://localhost:8080/"
+      name: "lol"
     };
-
-  connect(message => {
-      console.log(message);
-    });
   }
 
+  
+
   componentDidMount() {
-    let  self = this;
+    axios.get('http://localhost:8080/menu/da11ln').then(function (response) {
 
-    const socket = socketIOClient(self.state.endpoint)
+      //console.log(response["data"]["0"]["subcategories"]["1"]["products"]["0"]["name"]);
+      //console.log(response["data"]["0"]["subcategories"]["1"]["products"]["0"]["imageUrl"]);
+      //console.log(response["data"]["0"]["subcategories"]["1"]["products"]["0"]["displayPrice"]);
+      //console.log(response["data"]["0"]["subcategories"]["1"]["products"]["0"]["type"]);
+      //console.log(response["data"]["0"]["subcategories"]["1"]["products"]);
 
-    //socket.emit('gryo', 'gryo')
-    //socket.emit('acceleration', 'acceler')
+      // console.log(response["data"]["0"]["subcategories"]["2"]["products"]["0"]["name"]);
+      // console.log(response["data"]["0"]["subcategories"]["2"]["products"]["0"]["imageUrl"]);
+      // console.log(response["data"]["0"]["subcategories"]["2"]["products"]["0"]["displayPrice"]);
+      // console.log(response["data"]["0"]["subcategories"]["2"]["products"]["0"]["type"]);
+      //console.log(response["data"]["0"]["subcategories"]["2"]["products"]);
+
+      // console.log(response["data"]["1"]["subcategories"]["0"]["products"]["0"]["name"]);
+      // console.log(response["data"]["1"]["subcategories"]["0"]["products"]["0"]["imageUrl"]);
+      // console.log(response["data"]["1"]["subcategories"]["0"]["products"]["0"]["displayPrice"]);
+      // console.log(response["data"]["1"]["subcategories"]["0"]["products"]["0"]["type"]);
+
+      // console.log(response["data"]["2"]["subcategories"]["0"]["products"]["0"]["name"]);
+      // console.log(response["data"]["2"]["subcategories"]["0"]["products"]["0"]["imageUrl"]);
+      // console.log(response["data"]["2"]["subcategories"]["0"]["products"]["0"]["displayPrice"]);
+      // console.log(response["data"]["2"]["subcategories"]["0"]["products"]["0"]["type"]);
+    })
   }
 
 
