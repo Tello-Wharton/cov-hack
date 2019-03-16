@@ -28,15 +28,16 @@ class Home extends Component {
 
     })
 
-    var clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
+    const clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
+
     clientWebSocket.onopen = function() {
-        console.log("WebSocket Opened!")
+      console.log("WebSocket Opened!")
     };
     clientWebSocket.onclose = function(error) {
-        console.log("WebSocket Closed </3")
+      console.log("WebSocket Closed </3")
     };
     clientWebSocket.onerror = function(error) {
-        console.log("WebSocket Error >:(")
+      console.log("WebSocket Error >:(")
     };
     clientWebSocket.onmessage = function(event) {
       const timestamp = JSON.parse(event.data)
@@ -44,6 +45,17 @@ class Home extends Component {
       self.setState({
          timestamp: timestamp.version
        });
+
+       const test = new WebSocket("ws://localhost:8080/state-updater");
+       test.onopen = function() {
+
+         console.log("YAY")
+
+         setInterval(() => {
+           test.send("FUCK YEAH!");
+           console.log("FUCK YEAH!");
+         }, 1000 );
+       };
 
     }
   }
