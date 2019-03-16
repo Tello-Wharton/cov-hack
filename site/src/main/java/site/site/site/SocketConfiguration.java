@@ -16,13 +16,16 @@ import java.util.Map;
 @Configuration
 public class SocketConfiguration {
 
-    @Autowired
     private WebSocketHandler webSocketHandler;
+
+    public SocketConfiguration(WebSocketHandler webSocketHandler){
+        this.webSocketHandler = webSocketHandler;
+    }
 
     @Bean
     public HandlerMapping webSocketHandlerMapping() {
         Map<String, WebSocketHandler> map = new HashMap<>();
-        map.put("/event-emitter", webSocketHandler);
+        map.put("/state-emitter", webSocketHandler);
 
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         handlerMapping.setOrder(20);

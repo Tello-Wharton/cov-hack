@@ -47,7 +47,7 @@ class Home extends Component {
       
     })
 
-    var clientWebSocket = new WebSocket("ws://localhost:8080/event-emitter");
+    var clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
     clientWebSocket.onopen = function() {
         console.log("WebSocket Opened!")
     };
@@ -59,6 +59,7 @@ class Home extends Component {
     };
     clientWebSocket.onmessage = function(event) {
         console.log(JSON.parse(event.data));
+
     }
 
   }
