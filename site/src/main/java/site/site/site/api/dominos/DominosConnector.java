@@ -34,7 +34,7 @@ public class DominosConnector {
         URI uri = uriComponentsBuilder
                 .scheme(scheme)
                 .host(host)
-                .path("/storefindermap/storesearc")
+                .path("/storefindermap/storesearch")
                 .queryParam("SearchText", searchTerm)
                 .build()
                 .toUri();
