@@ -13,12 +13,11 @@ import java.time.Duration;
 @Component
 public class ReactiveWebSocketHandler implements WebSocketHandler {
 
-    Flux<Long> intervalFlux = Flux.interval(Duration.ofSeconds(1));
-
-
+    private Flux<Long> intervalFlux;
     private Gson gson;
 
     public ReactiveWebSocketHandler(){
+        this.intervalFlux = Flux.interval(Duration.ofSeconds(1));
         this.gson = new Gson();
     }
 
