@@ -64,6 +64,11 @@ public class State {
         pizzas.add(pizza);
     }
 
+    private void deletePizza(String pizzaID){
+
+    }
+
+
     private static HashMap<String, BiConsumer<State, String>> updateFunctions(){
 
         var updateFunctions = new HashMap<String, BiConsumer<State, String>>();
