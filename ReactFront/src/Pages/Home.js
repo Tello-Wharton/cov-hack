@@ -6,6 +6,7 @@ class Home extends Component {
   constructor(props) {
   super(props);
   this.state = {
+      normalpizzaid : [],
       normalpizzatitles : [],
       normalpizzaimgurl : [],
       normalpizzaprice : [],
@@ -20,6 +21,7 @@ class Home extends Component {
     axios.get('http://localhost:8080/menu/da11ln').then(function (response) {
       for(var key in response["data"]["0"]["subcategories"]["1"]["products"]) {
           self.setState({
+            normalpizzaid:[...self.state.normalpizzaid, response["data"]["0"]["subcategories"]["1"]["products"][key]["productId"]],
             normalpizzatitles:[...self.state.normalpizzatitles, response["data"]["0"]["subcategories"]["1"]["products"][key]["name"]],
             normalpizzaimgurl:[...self.state.normalpizzaimgurl, response["data"]["0"]["subcategories"]["1"]["products"][key]["imageUrl"]],
             normalpizzaprice:[...self.state.normalpizzaprice, response["data"]["0"]["subcategories"]["1"]["products"][key]["displayPrice"]],
@@ -90,6 +92,7 @@ class Home extends Component {
 
           {this.state.normalpizzatitles.map((ref, i) =>
             <Carding
+              id = {this.state.normalpizzaid[i]}
               imgurl = {this.state.normalpizzaimgurl[i]}
               title = {this.state.normalpizzatitles[i]}
               type = {this.state.normalpizzatype[i]}
