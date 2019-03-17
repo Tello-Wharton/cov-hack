@@ -89,8 +89,6 @@ handleClose = () => {
       <div className="App">
         <div>
 
-        <img id="header" src="/ack.png"/> 
-
         <ModalLogIn/>
         <ModalBasket/>
 
@@ -98,6 +96,10 @@ handleClose = () => {
         {this.state.user.map((ref, i) =>
           <p>{this.state.user[i]}</p>
         )}
+
+        <div>
+        <img id="header" src="/ack.png" alt="can we just order the hecking pizza?"/>
+        </div>
 
         <div className="foods">
           {this.state.normalpizzatitles.map((ref, i) => {

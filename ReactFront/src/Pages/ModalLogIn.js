@@ -69,7 +69,7 @@ class SimpleModalLogin extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <span>
         <Button onClick={this.handleOpen}>Login</Button>
         <Modal
           aria-labelledby="simple-modal-title"
@@ -87,7 +87,7 @@ class SimpleModalLogin extends React.Component {
 
           </div>
         </Modal>
-      </div>
+      </span>
     );
   }
 }

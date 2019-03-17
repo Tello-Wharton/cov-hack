@@ -93,7 +93,7 @@ class SimpleModalBasket extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <span>
         <Button onClick={this.handleOpen}>Basket</Button>
         <Modal
           aria-labelledby="simple-modal-title"
@@ -130,7 +130,7 @@ class SimpleModalBasket extends React.Component {
 
           </div>
         </Modal>
-      </div>
+      </span>
     );
   }
 }
