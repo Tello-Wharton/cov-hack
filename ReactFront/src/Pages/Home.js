@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import Carding from "./Carding";
+import ModalLogIn from "./ModalLogIn";
+import ModalBasket from "./ModalBasket";
 import axios from 'axios';
+import PropTypes from 'prop-types';
+
 
 class Home extends Component {
-  constructor(props) {
-  super(props);
+  static contextTypes = {
+      currentUser: PropTypes.object
+  };
+
+  constructor(props, context) {
+  super(props, context);
   this.state = {
       normalpizzaid : [],
       normalpizzatitles : [],
@@ -12,13 +20,24 @@ class Home extends Component {
       normalpizzaprice : [],
       normalpizzatype : [],
       timestamp: "",
-      user: []
+      user: [],
+      pizzas: [],
+      open: false
     };
   }
 
+handleOpen = () => {
+  this.setState({ open: true });
+};
+
+handleClose = () => {
+  this.setState({ open: false });
+};
+
   componentDidMount() {
     const self = this;
-    axios.get('http://localhost:8080/menu/da11ln').then(function (response) {
+
+    axios.get('http://10.1.250.162:8080/menu/da11ln').then(function (response) {
       for(var key in response["data"]["0"]["subcategories"]["1"]["products"]) {
           self.setState({
             normalpizzaid:[...self.state.normalpizzaid, response["data"]["0"]["subcategories"]["1"]["products"][key]["productId"]],
@@ -31,16 +50,7 @@ class Home extends Component {
 
     })
 
-    const name = "spencer"
-
-    axios.post(`http://localhost:8080/login`, name)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        window.location.reload();
-    })
-
-    const clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
+    const clientWebSocket = new WebSocket("ws://10.1.250.162:8080/state-emitter");
 
     clientWebSocket.onopen = function() {
       console.log("WebSocket Opened!")
@@ -54,34 +64,41 @@ class Home extends Component {
     clientWebSocket.onmessage = function(event) {
       const timestamp = JSON.parse(event.data)
       const usernames = []
+      const pizzas = []
 
-      console.log(timestamp)
+      for(var users in timestamp["state"]["users"]) {
+        usernames.push(timestamp["state"]["users"][users]['username']);
+      }
 
-      // console.log(timestamp["state"]["users"]);
-      for(var key in timestamp["state"]["users"]) {
-        usernames.push(timestamp["state"]["users"][key]['username']);
+      for(var key in timestamp["state"]["pizzas"]) {
+        pizzas.push(timestamp["state"]["pizzas"][key]);
       }
 
       self.setState({
          timestamp: timestamp.version,
-         user: usernames
+         user: usernames,
+         pizzas: pizzas
        });
     }
-
   }
 
 
+
   render() {
+    const {currentUser} = this.context;
     return (
       <div className="App">
-        <p>Home</p>
+        <div>
 
-        <p>{this.state.timestamp}</p>
+        <ModalLogIn/>
+        <ModalBasket/>
+
+        <h1>Users</h1>
+        {this.state.user.map((ref, i) =>
+          <p>{this.state.user[i]}</p>
+        )}
+
         <div className="foods">
-          {this.state.user.map((ref, i) =>
-            <p>{this.state.user[i]}</p>
-          )}
-
           {this.state.normalpizzatitles.map((ref, i) =>
             <Carding
               id = {this.state.normalpizzaid[i]}
@@ -93,6 +110,7 @@ class Home extends Component {
           )}
       </div>
     </div>
+  </div>
     );
   }
 }

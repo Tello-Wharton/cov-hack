@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
-
 
 class Login extends Component {
   constructor(props) {
   super(props);
   this.state = {
+      open: false,
       name: ""
     };
   }
@@ -23,11 +24,9 @@ class Login extends Component {
       'username': this.state.name
     }
 
-    axios.post(`http://localhost:8080/login`, datasend)
+    axios.post(`http://10.1.250.162:8080/login`, datasend)
       .then(res => {
         console.log(res);
-        // console.log(res.data);
-        // window.location.reload();
     })
  }
 
@@ -41,5 +40,6 @@ class Login extends Component {
     );
   }
 }
+
 
 export default Login;

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
+import { Card, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
-import axios from 'axios';
+import Dialog from "./Dialog";
+
 
 
 class Carding extends Component {
@@ -19,9 +20,6 @@ class Carding extends Component {
       console.log(error)
     };
   }
-    
-
-
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -31,8 +29,6 @@ class Carding extends Component {
       pizzaname: this.props.title,
       pizzaprice: this.props.price
     }
-
-
 
     var functionJson = {
       functionName: "addPizza",
@@ -44,14 +40,16 @@ class Carding extends Component {
 
     console.log(pizzaorder);
 
-    // const test = new WebSocket("ws://localhost:8080/state-updater");
-    // test.onopen = function() {
-    //   console.log("YAY")
-    //   setInterval(() => {
-    //     test.send("FUCK YEAH!");
-    //     console.log("FUCK YEAH!");
-    //   }, 1000 );
-    // };
+    const test = new WebSocket("ws://localhost:8080/state-updater");
+    const self = this
+    test.onopen = function() {
+      var functionJson = {
+        functionName: "addPizza",
+        functionArgs: self.props.title
+      }
+
+      test.send(functionJson);
+    };
   }
 
 
@@ -64,7 +62,10 @@ class Carding extends Component {
             <CardSubtitle>{this.props.type}</CardSubtitle>
             <div className="card-footer">
               <CardText>{this.props.price}</CardText>
-              <Button onClick={(e) => this.onSubmit(e)}>🛒</Button>
+              <Dialog
+                title = {this.props.title}
+                price = {this.props.price}
+                />
             </div>
           </CardBody>
         </Card>
