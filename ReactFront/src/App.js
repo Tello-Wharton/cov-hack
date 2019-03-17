@@ -17,17 +17,13 @@ class App extends Component {
       <HashRouter>
         <div>
           <div className="App">
-            <a href="/#">Home</a>
-            <a href="/#/files">Files</a>
-            <a href="/#/upload">Upload</a>
-            <a href="/#/login">Login</a>
           </div>
 
           <div className="content">
-           <Route exact path="/" component={Home}/>
+           <Route exact path="/" component={Login}/>
            <Route path="/files" component={Files}/>
            <Route path="/upload" component={Upload}/>
-            <Route path="/login" component={Login}/>
+            <Route path="/home" component={Home}/>
           </div>
         </div>
       </HashRouter>
