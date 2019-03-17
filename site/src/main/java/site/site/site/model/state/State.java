@@ -6,6 +6,8 @@ import site.site.site.model.users.User;
 
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class State {
 
@@ -32,6 +34,7 @@ public class State {
         this.updateFunctions = updateFunctions();
 
         this.users = new HashMap<>();
+        this.cake = new HashMap<>();
     }
 
     public void addUser(User user)
@@ -41,11 +44,13 @@ public class State {
 
     public void update(String functionJsonString){
 
+        Logger.getLogger("oof").log(Level.WARNING, functionJsonString);
         var functionJson = gson.fromJson(functionJsonString, FunctionJson.class);
+        Logger.getLogger("oof").log(Level.WARNING, functionJson.functionName);
         updateFunctions.get(functionJson.functionName).accept(this, functionJson.functionArgs);
     }
 
-    public void addTest(String string){
+    private void addTest(String string){
         cake.put(string, string);
     }
 
@@ -53,7 +58,7 @@ public class State {
 
         var updateFunctions = new HashMap<String, BiConsumer<State, String>>();
 
-        BiConsumer<State, String> test = (state, string) -> state.addTest(string);
+        BiConsumer<State, String> test = State::addTest;
 
         updateFunctions.put("test", test);
 
@@ -61,8 +66,8 @@ public class State {
     }
 
     private class FunctionJson{
-        public String functionName;
-        public String functionArgs;
+        String functionName;
+        String functionArgs;
     }
 
 }

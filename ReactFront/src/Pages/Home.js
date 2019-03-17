@@ -55,6 +55,8 @@ class Home extends Component {
       const timestamp = JSON.parse(event.data)
       const usernames = []
 
+      console.log(timestamp)
+
       // console.log(timestamp["state"]["users"]);
       for(var key in timestamp["state"]["users"]) {
         usernames.push(timestamp["state"]["users"][key]['username']);
@@ -67,15 +69,32 @@ class Home extends Component {
     }
 
     const test = new WebSocket("ws://localhost:8080/state-updater");
+
+    test.onclose = function(error) {
+      console.log("WebSocket Closed ?")
+      console.log(error)
+    };
+
+    test.onerror = function(error) {
+      console.log("WebSocket Error >:(")
+      console.log(error)
+    };
     test.onopen = function() {
 
       console.log("YAY")
 
+      var functionJson = {
+        functionName: "test",
+        functionArgs: "plz"
+      }
+
       setInterval(() => {
-        test.send("FUCK YEAH!");
-        console.log("FUCK YEAH!");
+        test.send(JSON.stringify(functionJson));
+        console.log(functionJson);
       }, 1000 );
     };
+
+
   }
 
 
