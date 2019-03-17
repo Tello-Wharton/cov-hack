@@ -98,14 +98,24 @@ handleClose = () => {
         )}
 
         <div className="foods">
-          {this.state.normalpizzatitles.map((ref, i) =>
-            <Carding
-              id = {this.state.normalpizzaid[i]}
-              imgurl = {this.state.normalpizzaimgurl[i]}
-              title = {this.state.normalpizzatitles[i]}
-              type = {this.state.normalpizzatype[i]}
-              price = {this.state.normalpizzaprice[i]}
-              />
+          {this.state.normalpizzatitles.map((ref, i) => {
+            var marq = <span></span>
+            if(i % 5 === 0) {
+                marq = <marquee></marquee>
+            }
+
+            return <React.Fragment>
+              {marq}
+              <Carding
+                  id = {this.state.normalpizzaid[i]}
+                  imgurl = {this.state.normalpizzaimgurl[i]}
+                  title = {this.state.normalpizzatitles[i]}
+                  type = {this.state.normalpizzatype[i]}
+                  price = {this.state.normalpizzaprice[i]}
+                  counter = {i}
+                  />
+            </React.Fragment>
+          }
           )}
       </div>
     </div>
