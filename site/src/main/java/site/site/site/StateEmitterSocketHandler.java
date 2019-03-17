@@ -27,7 +27,7 @@ public class StateEmitterSocketHandler implements WebSocketHandler {
 
         return webSocketSession.send(intervalFlux
                 .map(String::valueOf)
-                .map(signal -> StateVersion.getStateVersion(state -> state.addName("CALL")))
+                .map(signal -> StateVersion.getStateVersion())
                 .map(stateVersion -> gson.toJson(stateVersion))
                 .map(webSocketSession::textMessage));
     }

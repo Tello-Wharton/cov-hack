@@ -15,25 +15,11 @@ public class State {
     }
 
 
-    //ignore these two
-    private String cake;
-    private List<String> names;
-
     private Map<String, User> users;
 
 
     private State() {
-        this.cake = "CAKE!";
-        this.names = new ArrayList<>();
         this.users = new HashMap<>();
-    }
-
-    public void setCake(String cake){
-        this.cake = cake;
-    }
-
-    public void addName(String name){
-        this.names.add(name);
     }
 
     public void addUser(User user)
