@@ -2,6 +2,7 @@ package site.site.site.model.state;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
+import site.site.site.model.PizzaOrder;
 import site.site.site.model.users.User;
 
 import java.util.*;
@@ -26,7 +27,7 @@ public class State {
     private Map<String, BiConsumer<State, String>> updateFunctions;
 
     private Map<String, User> users;
-    private List<String> pizzas;
+    private List<PizzaOrder> pizzas;
 
     private Map<String, String> cake;
 
@@ -58,7 +59,8 @@ public class State {
         cake.put(string, string);
     }
 
-    private void addPizza(String pizza){
+    private void addPizza(String pizzaOrder){
+        var pizza = gson.fromJson(pizzaOrder, PizzaOrder.class);
         pizzas.add(pizza);
     }
 
