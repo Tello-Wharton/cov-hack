@@ -63,6 +63,7 @@ class SimpleModalLogin extends React.Component {
       axios.post("http://" + ip + ":8080/login", datasend)
         .then(res => {
           console.log(res);
+          this.handleClose()
       })
    }
 
