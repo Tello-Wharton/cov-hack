@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import RemoveBtm from "./RemoveBtm";
+import DialogRemove from "./DialogRemove";
 
 
 
@@ -118,7 +118,13 @@ class SimpleModalBasket extends React.Component {
                   <td> {this.state.pizzaid[i]} </td>
                   <td> {this.state.pizzatitle[i]} </td>
                   <td> {this.state.pizzaprice[i]} </td>
-                  <td> <RemoveBtm/> </td>
+                  <td>
+                    <DialogRemove
+                      id = {this.state.pizzaid[i]}
+                      title = {this.state.pizzatitle[i]}
+                      price = {this.state.pizzaprice[i]}
+                    />
+                </td>
                 </tr>)}
             </table>
 
