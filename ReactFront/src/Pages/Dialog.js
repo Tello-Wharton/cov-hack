@@ -48,6 +48,14 @@ class AlertDialog extends React.Component {
 
     console.log(pizzaorder);
 
+    // var functionJson = {
+    //   functionName: "removePizza",
+    //   functionArgs: "1602"
+    // }
+
+    // this.test.send(JSON.stringify(functionJson));
+
+
     this.handleClose()
   }
 
