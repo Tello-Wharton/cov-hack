@@ -89,6 +89,8 @@ handleClose = () => {
       <div className="App">
         <div>
 
+        <img id="header" src="/ack.png"/> 
+
         <ModalLogIn/>
         <ModalBasket/>
 
