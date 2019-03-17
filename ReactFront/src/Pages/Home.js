@@ -64,22 +64,16 @@ class Home extends Component {
        });
     }
 
-       // const test = new WebSocket("ws://localhost:8080/state-updater");
-       // test.onopen = function() {
-       //
-       //   console.log("YAY")
-       //
-       //   setInterval(() => {
-       //     test.send("FUCK YEAH!");
-       //     console.log("FUCK YEAH!");
-       //   }, 1000 );
-       // };
+    const test = new WebSocket("ws://localhost:8080/state-updater");
+    test.onopen = function() {
 
-   //   setInterval(() => {
-   //     test.send("FUCK YEAH!");
-   //     console.log("FUCK YEAH!");
-   //   }, 1000 );
-   // };
+      console.log("YAY")
+
+      setInterval(() => {
+        test.send("FUCK YEAH!");
+        console.log("FUCK YEAH!");
+      }, 1000 );
+    };
   }
 
 
@@ -87,21 +81,23 @@ class Home extends Component {
     return (
       <div className="App">
         <p>Home</p>
+
         <p>{this.state.timestamp}</p>
+        <div className="foods">
+          {this.state.user.map((ref, i) =>
+            <p>{this.state.user[i]}</p>
+          )}
 
-        {this.state.user.map((ref, i) =>
-          <p>{this.state.user[i]}</p>
-        )}
-
-        {this.state.normalpizzatitles.map((ref, i) =>
-          <Carding
-            imgurl = {this.state.normalpizzaimgurl[i]}
-            title = {this.state.normalpizzatitles[i]}
-            type = {this.state.normalpizzatype[i]}
-            price = {this.state.normalpizzaprice[i]}
-            />
-        )}
+          {this.state.normalpizzatitles.map((ref, i) =>
+            <Carding
+              imgurl = {this.state.normalpizzaimgurl[i]}
+              title = {this.state.normalpizzatitles[i]}
+              type = {this.state.normalpizzatype[i]}
+              price = {this.state.normalpizzaprice[i]}
+              />
+          )}
       </div>
+    </div>
     );
   }
 }

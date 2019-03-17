@@ -11,12 +11,12 @@ import site.site.site.model.state.StateVersion;
 import java.time.Duration;
 
 @Component
-public class ReactiveWebSocketHandler implements WebSocketHandler {
+public class StateEmitterSocketHandler implements WebSocketHandler {
 
     private Flux<Long> intervalFlux;
     private Gson gson;
 
-    public ReactiveWebSocketHandler(){
+    public StateEmitterSocketHandler(){
         this.intervalFlux = Flux.interval(Duration.ofSeconds(1));
         this.gson = new Gson();
     }

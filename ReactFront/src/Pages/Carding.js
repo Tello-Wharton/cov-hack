@@ -9,13 +9,14 @@ class Carding extends Component {
   render() {
     return (
       <div>
-        <Card>
-          <CardImg top width="20%" src={this.props.imgurl} alt="Card image cap" />
+        <Card style={{backgroundImage: "url(" + this.props.imgurl + ")"}}>
           <CardBody>
             <CardTitle>{this.props.title}</CardTitle>
             <CardSubtitle>{this.props.type}</CardSubtitle>
-            <CardText>{this.props.price}</CardText>
-            <Button>Add To Basket</Button>
+            <div className="card-footer">
+              <CardText>{this.props.price}</CardText>
+              <Button>🛒</Button>
+            </div>
           </CardBody>
         </Card>
       <br></br>
