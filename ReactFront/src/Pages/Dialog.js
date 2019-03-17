@@ -36,6 +36,8 @@ class AlertDialog extends React.Component {
       pizzaprice: this.props.price
     }
 
+    console.log(pizzaorder);
+
     var functionJson = {
       functionName: "addPizza",
       functionArgs: this.props.title

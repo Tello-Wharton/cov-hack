@@ -66,6 +66,8 @@ handleClose = () => {
       const usernames = []
       const pizzas = []
 
+      console.log(timestamp);
+
       for(var users in timestamp["state"]["users"]) {
         usernames.push(timestamp["state"]["users"][users]['username']);
       }

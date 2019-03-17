@@ -63,6 +63,7 @@ class Carding extends Component {
             <div className="card-footer">
               <CardText>{this.props.price}</CardText>
               <Dialog
+                id = {this.props.id}
                 title = {this.props.title}
                 price = {this.props.price}
                 />
