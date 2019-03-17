@@ -4,10 +4,7 @@ import {
   Route,
   HashRouter
 } from "react-router-dom";
-import Files from "./Pages/Files";
-import Upload from "./Pages/Upload";
 import Home from "./Pages/Home";
-import Login from "./Login";
 
 
 

@@ -85,7 +85,6 @@ handleClose = () => {
 
 
   render() {
-    const {currentUser} = this.context;
     return (
       <div className="App">
         <div>
