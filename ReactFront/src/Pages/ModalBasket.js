@@ -35,7 +35,9 @@ class SimpleModalBasket extends React.Component {
   this.state = {
       open: false,
       name: "",
-      pizzas: []
+      pizzaid: [],
+      pizzatitle: [],
+      pizzaprice: []
     };
   }
 
@@ -66,15 +68,23 @@ class SimpleModalBasket extends React.Component {
 
       console.log(timestamp)
 
-      const pizzas = []
+      const pizzaid = []
+      const pizzatitle = []
+      const pizzaprice = []
+
 
       for(var key in timestamp["state"]["pizzas"]) {
-        pizzas.push(timestamp["state"]["pizzas"][key]);
+        const basketstring = {}
+        pizzaid.push(timestamp["state"]["pizzas"][key]["pizzaid"]);
+        pizzatitle.push(timestamp["state"]["pizzas"][key]["pizzaname"]);
+        pizzaprice.push(timestamp["state"]["pizzas"][key]["pizzaprice"]);
       }
 
       self.setState({
          timestamp: timestamp.version,
-         pizzas: pizzas
+         pizzaid: pizzaid,
+         pizzatitle: pizzatitle,
+         pizzaprice: pizzaprice
        });
     }
   }
@@ -95,9 +105,20 @@ class SimpleModalBasket extends React.Component {
             <Typography variant="h6" id="modal-title">
               Basket
             </Typography>
-            {this.state.pizzas.map((ref, i) =>
-              <p>{this.state.pizzas[i]}</p>
-            )}
+
+            <table>
+              <tr>
+                <th> ID </th>
+                <th> PizzaTitle </th>
+                <th> PizzaPrice </th>
+              </tr>
+              {this.state.pizzatitle.map((ref, i) =>
+                <tr>
+                  <td> {this.state.pizzaid[i]} </td>
+                  <td> {this.state.pizzatitle[i]} </td>
+                  <td> {this.state.pizzaprice[i]} </td>
+                </tr>)}
+            </table>
 
           </div>
         </Modal>

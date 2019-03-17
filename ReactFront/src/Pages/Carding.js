@@ -52,7 +52,6 @@ class Carding extends Component {
     };
   }
 
-
   render() {
     return (
       <div>
