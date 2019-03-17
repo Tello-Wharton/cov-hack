@@ -64,8 +64,14 @@ public class State {
         pizzas.add(pizza);
     }
 
-    private void deletePizza(String pizzaID){
-
+    private void removePizza(String pizzaID){
+        var numPizzas = pizzas.size();
+        for (int x = 0; x < numPizzas; x++){
+            if (pizzas.get(x).pizzaid.equals(pizzaID)){
+                pizzas.remove(x);
+                return;
+            }
+        }
     }
 
 
@@ -75,9 +81,11 @@ public class State {
 
         BiConsumer<State, String> test = State::addTest;
         BiConsumer<State, String> addPizza = State::addPizza;
+        BiConsumer<State, String> removePizza = State::removePizza;
 
         updateFunctions.put("test", test);
         updateFunctions.put("addPizza", addPizza);
+        updateFunctions.put("removePizza", removePizza);
 
         return updateFunctions;
     }
