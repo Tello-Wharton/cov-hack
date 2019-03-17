@@ -59,7 +59,8 @@ class SimpleModalLogin extends React.Component {
         'username': this.state.name
       }
 
-      axios.post(`http://localhost:8080/login`, datasend)
+      let ip = require("./ip.json")["ip"];
+      axios.post("http://" + ip + ":8080/login", datasend)
         .then(res => {
           console.log(res);
       })

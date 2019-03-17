@@ -8,7 +8,10 @@ import Dialog from "./Dialog";
 class Carding extends Component {
   constructor(props) {
       super(props);
-      this.test = new WebSocket("ws://localhost:8080/state-updater");
+
+      let ip = require("./ip.json")["ip"];
+
+      this.test = new WebSocket("ws://" + ip + ":8080/state-updater");
 
     this.test.onclose = function(error) {
       console.log("WebSocket Closed ?")
@@ -40,7 +43,9 @@ class Carding extends Component {
 
     console.log(pizzaorder);
 
-    const test = new WebSocket("ws://localhost:8080/state-updater");
+    let ip = require("./ip.json")["ip"];
+
+    const test = new WebSocket("ws://" + ip + ":8080/state-updater");
     const self = this
     test.onopen = function() {
       var functionJson = {

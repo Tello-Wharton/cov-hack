@@ -53,7 +53,8 @@ class SimpleModalBasket extends React.Component {
   componentDidMount() {
     const self = this;
 
-    const clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
+    let ip = require("./ip.json")["ip"];
+    const clientWebSocket = new WebSocket("ws://" + ip + ":8080/state-emitter");
 
     clientWebSocket.onopen = function() {
       console.log("WebSocket Opened!")

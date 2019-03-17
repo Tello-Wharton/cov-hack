@@ -14,7 +14,8 @@ class AlertDialogRemove extends React.Component {
         open: false,
       };
 
-    this.test = new WebSocket("ws://localhost:8080/state-updater");
+    let ip = require("./ip.json")["ip"];
+    this.test = new WebSocket("ws://" + ip + ":8080/state-updater");
 
     this.test.onclose = function(error) {
       console.log("WebSocket Closed ?")
