@@ -59,7 +59,7 @@ class SimpleModalLogin extends React.Component {
         'username': this.state.name
       }
 
-      axios.post(`http://10.1.250.162:8080/login`, datasend)
+      axios.post(`http://localhost:8080/login`, datasend)
         .then(res => {
           console.log(res);
       })
