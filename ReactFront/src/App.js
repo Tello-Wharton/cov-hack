@@ -20,10 +20,7 @@ class App extends Component {
           </div>
 
           <div className="content">
-           <Route exact path="/" component={Login}/>
-           <Route path="/files" component={Files}/>
-           <Route path="/upload" component={Upload}/>
-            <Route path="/home" component={Home}/>
+           <Route exact path="/" component={Home}/>
           </div>
         </div>
       </HashRouter>
