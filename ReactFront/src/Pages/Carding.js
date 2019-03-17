@@ -19,6 +19,18 @@ class Carding extends Component {
       console.log("WebSocket Error >:(")
       console.log(error)
     };
+
+    // var functionJson = {
+    //   functionName: "test",
+    //   functionArgs: JSON.stringify({oof: "oof", plz: "plz?"})
+    // }
+
+    // this.test.onopen = () => {
+    //   setInterval(() => {
+    //     this.test.send(JSON.stringify(functionJson));
+    //     console.log("FUCK YEAH!");
+    //   }, 1000 );
+    // };
   }
 
   onSubmit = (e) => {
