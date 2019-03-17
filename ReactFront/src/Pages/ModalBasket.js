@@ -50,7 +50,7 @@ class SimpleModalBasket extends React.Component {
   componentDidMount() {
     const self = this;
 
-    const clientWebSocket = new WebSocket("ws://10.1.250.162:8080/state-emitter");
+    const clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
 
     clientWebSocket.onopen = function() {
       console.log("WebSocket Opened!")
@@ -63,6 +63,9 @@ class SimpleModalBasket extends React.Component {
     };
     clientWebSocket.onmessage = function(event) {
       const timestamp = JSON.parse(event.data)
+
+      console.log(timestamp)
+
       const pizzas = []
 
       for(var key in timestamp["state"]["pizzas"]) {

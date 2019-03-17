@@ -37,7 +37,7 @@ handleClose = () => {
   componentDidMount() {
     const self = this;
 
-    axios.get('http://10.1.250.162:8080/menu/da11ln').then(function (response) {
+    axios.get('http://localhost:8080/menu/da11ln').then(function (response) {
       for(var key in response["data"]["0"]["subcategories"]["1"]["products"]) {
           self.setState({
             normalpizzaid:[...self.state.normalpizzaid, response["data"]["0"]["subcategories"]["1"]["products"][key]["productId"]],
@@ -50,7 +50,7 @@ handleClose = () => {
 
     })
 
-    const clientWebSocket = new WebSocket("ws://10.1.250.162:8080/state-emitter");
+    const clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
 
     clientWebSocket.onopen = function() {
       console.log("WebSocket Opened!")
