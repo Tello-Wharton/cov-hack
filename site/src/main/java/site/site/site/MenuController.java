@@ -16,11 +16,9 @@ import java.util.List;
 public class MenuController {
 
     private final DominosConnector dominosConnector;
-    private final Gson gson;
 
     public MenuController(DominosConnector dominosConnector) {
         this.dominosConnector = dominosConnector;
-        this.gson = new Gson();
     }
 
     @CrossOrigin
