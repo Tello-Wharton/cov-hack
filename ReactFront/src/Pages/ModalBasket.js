@@ -4,7 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
+import RemoveBtm from "./RemoveBtm";
+
 
 
 function getModalStyle() {
@@ -74,7 +75,6 @@ class SimpleModalBasket extends React.Component {
 
 
       for(var key in timestamp["state"]["pizzas"]) {
-        const basketstring = {}
         pizzaid.push(timestamp["state"]["pizzas"][key]["pizzaid"]);
         pizzatitle.push(timestamp["state"]["pizzas"][key]["pizzaname"]);
         pizzaprice.push(timestamp["state"]["pizzas"][key]["pizzaprice"]);
@@ -111,12 +111,14 @@ class SimpleModalBasket extends React.Component {
                 <th> ID </th>
                 <th> PizzaTitle </th>
                 <th> PizzaPrice </th>
+                <th> RemovePizza </th>
               </tr>
               {this.state.pizzatitle.map((ref, i) =>
                 <tr>
                   <td> {this.state.pizzaid[i]} </td>
                   <td> {this.state.pizzatitle[i]} </td>
                   <td> {this.state.pizzaprice[i]} </td>
+                  <td> <RemoveBtm/> </td>
                 </tr>)}
             </table>
 
@@ -130,8 +132,6 @@ class SimpleModalBasket extends React.Component {
 SimpleModalBasket.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-// We need an intermediary variable for handling the recursive nesting.
 const SimpleModalBasketWrapped = withStyles(styles)(SimpleModalBasket);
 
 export default SimpleModalBasketWrapped;

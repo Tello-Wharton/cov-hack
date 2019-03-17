@@ -73,6 +73,14 @@ marquee {
   float: left;
 }
 
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+table{
+    width: 100%;
+}
 
 @keyframes App-logo-spin {
   from {
