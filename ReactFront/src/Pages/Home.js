@@ -68,33 +68,6 @@ class Home extends Component {
        });
     }
 
-    const test = new WebSocket("ws://localhost:8080/state-updater");
-
-    test.onclose = function(error) {
-      console.log("WebSocket Closed ?")
-      console.log(error)
-    };
-
-    test.onerror = function(error) {
-      console.log("WebSocket Error >:(")
-      console.log(error)
-    };
-    test.onopen = function() {
-
-      console.log("YAY")
-
-      var functionJson = {
-        functionName: "test",
-        functionArgs: "plz"
-      }
-
-      setInterval(() => {
-        test.send(JSON.stringify(functionJson));
-        console.log(functionJson);
-      }, 1000 );
-    };
-
-
   }
 
 
