@@ -98,6 +98,10 @@ handleClose = () => {
           <p>{this.state.user[i]}</p>
         )}
 
+        <div>
+        <img id="header" src="/ack.png" alt="can we just order the hecking pizza?"/>
+        </div>
+
         <div className="foods">
           {this.state.normalpizzatitles.map((ref, i) => {
             var marq = <span></span>
