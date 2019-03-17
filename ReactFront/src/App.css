@@ -51,8 +51,8 @@
   position: absolute;
   bottom: 0px;
   background: rgba(255, 255, 255, 0.5);
-  padding: 5px;
   width: 100%;
+  padding: 10px 0;
 }
 
 .card-text, .card-footer button {
@@ -64,6 +64,11 @@
 .card-subtitle {
   display: none;
 }
+
+body {
+  background: #ff8181;
+}
+
 
 @keyframes App-logo-spin {
   from {
