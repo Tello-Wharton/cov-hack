@@ -10,7 +10,8 @@ class Home extends Component {
       normalpizzaimgurl : [],
       normalpizzaprice : [],
       normalpizzatype : [],
-      timestamp: ""
+      timestamp: "",
+      user: []
     };
   }
 
@@ -28,6 +29,15 @@ class Home extends Component {
 
     })
 
+    const name = "spencer"
+
+    axios.post(`http://localhost:8080/login`, name)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        window.location.reload();
+    })
+
     const clientWebSocket = new WebSocket("ws://localhost:8080/state-emitter");
 
     clientWebSocket.onopen = function() {
@@ -41,19 +51,29 @@ class Home extends Component {
     };
     clientWebSocket.onmessage = function(event) {
       const timestamp = JSON.parse(event.data)
+      const usernames = []
 
-      console.log(timestamp);
+      // console.log(timestamp["state"]["users"]);
+      for(var key in timestamp["state"]["users"]) {
+        usernames.push(timestamp["state"]["users"][key]['username']);
+      }
 
       self.setState({
-         timestamp: timestamp.version
+         timestamp: timestamp.version,
+         user: usernames
        });
     }
 
-
-   // const test = new WebSocket("ws://localhost:8080/state-updater");
-   // test.onopen = function() {
-
-   //   console.log("YAY")
+       // const test = new WebSocket("ws://localhost:8080/state-updater");
+       // test.onopen = function() {
+       //
+       //   console.log("YAY")
+       //
+       //   setInterval(() => {
+       //     test.send("FUCK YEAH!");
+       //     console.log("FUCK YEAH!");
+       //   }, 1000 );
+       // };
 
    //   setInterval(() => {
    //     test.send("FUCK YEAH!");
@@ -68,6 +88,11 @@ class Home extends Component {
       <div className="App">
         <p>Home</p>
         <p>{this.state.timestamp}</p>
+
+        {this.state.user.map((ref, i) =>
+          <p>{this.state.user[i]}</p>
+        )}
+
         {this.state.normalpizzatitles.map((ref, i) =>
           <Carding
             imgurl = {this.state.normalpizzaimgurl[i]}
