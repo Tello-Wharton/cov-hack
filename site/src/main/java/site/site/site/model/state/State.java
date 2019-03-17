@@ -1,6 +1,7 @@
 package site.site.site.model.state;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.Gson;
 import site.site.site.model.users.User;
 
 import java.util.*;
@@ -17,6 +18,9 @@ public class State {
     }
 
     @JsonIgnore
+    private transient final Gson gson;
+
+    @JsonIgnore
     private Map<String, BiConsumer<State, String>> updateFunctions;
 
     private Map<String, User> users;
@@ -24,13 +28,21 @@ public class State {
 
 
     private State() {
-        this.users = new HashMap<>();
+        this.gson = new Gson();
         this.updateFunctions = updateFunctions();
+
+        this.users = new HashMap<>();
     }
 
     public void addUser(User user)
     {
-        this.users.put(user.username, user);
+        users.put(user.username, user);
+    }
+
+    public void update(String functionJsonString){
+
+        var functionJson = gson.fromJson(functionJsonString, FunctionJson.class);
+        updateFunctions.get(functionJson.functionName).accept(this, functionJson.functionArgs);
     }
 
     public void addTest(String string){
@@ -48,5 +60,9 @@ public class State {
         return updateFunctions;
     }
 
+    private class FunctionJson{
+        public String functionName;
+        public String functionArgs;
+    }
 
 }
