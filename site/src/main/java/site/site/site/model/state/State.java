@@ -26,6 +26,8 @@ public class State {
     private Map<String, BiConsumer<State, String>> updateFunctions;
 
     private Map<String, User> users;
+    private List<String> pizzas;
+
     private Map<String, String> cake;
 
 
@@ -34,6 +36,8 @@ public class State {
         this.updateFunctions = updateFunctions();
 
         this.users = new HashMap<>();
+        this.pizzas = new ArrayList<>();
+
         this.cake = new HashMap<>();
     }
 
@@ -54,13 +58,19 @@ public class State {
         cake.put(string, string);
     }
 
+    private void addPizza(String pizza){
+        pizzas.add(pizza);
+    }
+
     private static HashMap<String, BiConsumer<State, String>> updateFunctions(){
 
         var updateFunctions = new HashMap<String, BiConsumer<State, String>>();
 
         BiConsumer<State, String> test = State::addTest;
+        BiConsumer<State, String> addPizza = State::addPizza;
 
         updateFunctions.put("test", test);
+        updateFunctions.put("addPizza", addPizza);
 
         return updateFunctions;
     }
