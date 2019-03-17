@@ -40,7 +40,7 @@ class AlertDialog extends React.Component {
 
     var functionJson = {
       functionName: "addPizza",
-      functionArgs: this.props.title
+      functionArgs: JSON.stringify(pizzaorder)
     }
 
     this.test.send(JSON.stringify(functionJson));
@@ -48,17 +48,7 @@ class AlertDialog extends React.Component {
 
     console.log(pizzaorder);
 
-    const test = new WebSocket("ws://localhost:8080/state-updater");
-    const self = this
-    test.onopen = function() {
-      var functionJson = {
-        functionName: "addPizza",
-        functionArgs: self.props.title
-      }
-
-      test.send(functionJson);
-      self.handleClose()
-    };
+    this.handleClose()
   }
 
 
